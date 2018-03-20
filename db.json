@@ -202,7 +202,7 @@
         },
         {
           "id":3,
-          "team":8,
+          "team":7,
           "title":"Laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis",
           "image":"3.jpg",
           "url":"XKI0xlnMBZQ",
@@ -211,7 +211,7 @@
         },
         {
           "id":4,
-          "team":2,
+          "team":3,
           "title":"Qui blanditiis praesentium voluptatum deleniti atque corrupti quos",
           "image":"4.jpg",
           "url":"XKI0xlnMBZQ",
@@ -220,7 +220,7 @@
         },
         {
           "id":5,
-          "team":8,
+          "team":5,
           "title":"Sed ut perspiciatis unde omnis iste natus error sit",
           "image":"5.jpg",
           "url":"XKI0xlnMBZQ",
@@ -229,7 +229,7 @@
         },
         {
           "id":6,
-          "team":8,
+          "team":1,
           "title":"Laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis",
           "image":"6.jpg",
           "url":"XKI0xlnMBZQ",
@@ -239,7 +239,7 @@
 
         {
           "id":7,
-          "team":2,
+          "team":6,
           "title":"Qui blanditiis praesentium voluptatum deleniti atque corrupti quos",
           "image":"7.jpg",
           "url":"XKI0xlnMBZQ",
