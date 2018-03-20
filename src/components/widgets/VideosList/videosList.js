@@ -80,7 +80,6 @@ class VideosList extends Component {
   };
 
   render() {
-    console.log('this.state.videos', this.state.videos);
     return (
       <div className={styles.videosList_wrapper}>
         {this.renderTitle()}
