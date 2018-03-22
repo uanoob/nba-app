@@ -1,16 +1,21 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
+import moment from 'moment';
 
 import styles from './cardinfo.css';
 
 const Cardinfo = props => {
   const getTeamName = (teams, team) => {
     let data = teams.find(item => {
-      return item.id === team;
+      return item.teamId === team;
     });
     if (data) {
       return data.name;
     }
+  };
+
+  const formatDate = date => {
+    return moment(date).format(' MM-DD-YYYY ');
   };
 
   return (
@@ -20,7 +25,7 @@ const Cardinfo = props => {
       </span>
       <span className={styles.date}>
         <FontAwesome name="clock-o" />
-        {props.date}
+        {formatDate(props.date)}
       </span>
     </div>
   );
