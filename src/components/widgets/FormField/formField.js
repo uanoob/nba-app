@@ -3,6 +3,21 @@ import React from 'react';
 import styles from './formField.css';
 
 const FormField = ({ id, formdata, change }) => {
+
+  const showError = () => {
+    let errorMessage = null;
+
+    if(formdata.validation && !formdata.valid) {
+      errorMessage = (
+        <div className={styles.labelError} >
+          {formdata.validationMessage}
+        </div>
+      )
+    }
+
+    return errorMessage;
+  }
+
   const renderTemplate = () => {
     let formTemplate = null;
     switch (formdata.element) {
@@ -27,6 +42,7 @@ const FormField = ({ id, formdata, change }) => {
                 })
               }
             />
+            {showError()}
           </div>
         );
         break;
