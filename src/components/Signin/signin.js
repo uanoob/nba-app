@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { firebase } from '../../firebase';
+
 import FormField from '../widgets/FormField/formField';
 import styles from './signin.css';
 
@@ -58,8 +60,6 @@ class Signin extends Component {
     }
     newElement.touched = element.blur;
 
-    console.log(newFormdata);
-
     newFormdata[element.id] = newElement;
     this.setState({
       formdata: newFormdata,
@@ -108,9 +108,34 @@ class Signin extends Component {
         });
       }
       if (type) {
-        console.log('Log in');
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(dataToSubmit.email, dataToSubmit.password)
+          .then(() => {
+            this.props.history.push('/');
+          })
+          .catch(error => {
+            this.setState({
+              loading: false,
+              registerError: error.message,
+            });
+          });
       } else {
-        console.log('Register');
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(
+            dataToSubmit.email,
+            dataToSubmit.password,
+          )
+          .then(() => {
+            this.props.history.push('/');
+          })
+          .catch(error => {
+            this.setState({
+              loading: false,
+              registerError: error.message,
+            });
+          });
       }
     }
   };
@@ -125,6 +150,13 @@ class Signin extends Component {
         </button>
         <button onClick={event => this.submitForm(event, true)}>Log in</button>
       </div>
+    );
+
+  showError = () =>
+    this.state.registerError !== '' ? (
+      <div className={styles.error}>{this.state.registerError}</div>
+    ) : (
+      ''
     );
 
   render() {
@@ -143,6 +175,7 @@ class Signin extends Component {
             change={element => this.updateForm(element)}
           />
           {this.submitButton()}
+          {this.showError()}
         </form>
       </div>
     );
