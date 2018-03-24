@@ -3,20 +3,17 @@ import React from 'react';
 import styles from './formField.css';
 
 const FormField = ({ id, formdata, change }) => {
-
   const showError = () => {
     let errorMessage = null;
 
-    if(formdata.validation && !formdata.valid) {
+    if (formdata.validation && !formdata.valid) {
       errorMessage = (
-        <div className={styles.labelError} >
-          {formdata.validationMessage}
-        </div>
-      )
+        <div className={styles.labelError}>{formdata.validationMessage}</div>
+      );
     }
 
     return errorMessage;
-  }
+  };
 
   const renderTemplate = () => {
     let formTemplate = null;
@@ -43,6 +40,36 @@ const FormField = ({ id, formdata, change }) => {
               }
             />
             {showError()}
+          </div>
+        );
+        break;
+      case 'select':
+        formTemplate = (
+          <div>
+            <select
+              value={formdata.value}
+              name={formdata.config.name}
+              onChange={event =>
+                change({
+                  event,
+                  id,
+                  blur: false,
+                })
+              }
+              onBlur={event =>
+                change({
+                  event,
+                  id,
+                  blur: true,
+                })
+              }
+            >
+              {formdata.config.options.map((item, i) => (
+                <option key={i} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
           </div>
         );
         break;
