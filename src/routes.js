@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import Layout from './hoc/Layout/layout';
 import Home from './components/Home/home';
@@ -10,17 +10,61 @@ import VideosMain from './components/Articles/Videos/Main';
 import SignIn from './components/Signin/signin';
 import Dashboard from './components/Dashboard/dashboard';
 
+import PrivateRoutes from './components/AuthRoutes/privateRoutes';
+import PublicRoutes from './components/AuthRoutes/publicRoutes';
+
 const Routes = props => {
   return (
     <Layout user={props.user}>
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/news" exact component={NewsMain} />
-        <Route path="/articles/:id" exact component={NewsArticle} />
-        <Route path="/videos/:id" exact component={VideoArticle} />
-        <Route path="/videos" exact component={VideosMain} />
-        <Route path="/signin" exact component={SignIn} />
-        <Route path="/dashboard" exact component={Dashboard} />
+        <PublicRoutes
+          {...props}
+          restricted={false}
+          path="/"
+          exact
+          component={Home}
+        />
+        <PublicRoutes
+          {...props}
+          restricted={false}
+          path="/news"
+          exact
+          component={NewsMain}
+        />
+        <PublicRoutes
+          {...props}
+          restricted={false}
+          path="/articles/:id"
+          exact
+          component={NewsArticle}
+        />
+        <PublicRoutes
+          {...props}
+          restricted={false}
+          path="/videos/:id"
+          exact
+          component={VideoArticle}
+        />
+        <PublicRoutes
+          {...props}
+          restricted={false}
+          path="/videos"
+          exact
+          component={VideosMain}
+        />
+        <PublicRoutes
+          {...props}
+          restricted={true}
+          path="/signin"
+          exact
+          component={SignIn}
+        />
+        <PrivateRoutes
+          {...props}
+          path="/dashboard"
+          exact
+          component={Dashboard}
+        />
       </Switch>
     </Layout>
   );

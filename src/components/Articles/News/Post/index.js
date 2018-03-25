@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import {
+  firebase,
   firebaseDB,
   firebaseTeams,
   firebaseLooper,
@@ -14,6 +15,7 @@ class NewsArticles extends Component {
   state = {
     article: [],
     team: [],
+    imageURL: '',
   };
 
   componentWillMount() {
@@ -32,6 +34,7 @@ class NewsArticles extends Component {
               article,
               team,
             });
+            this.getImageURL(article.image);
           });
       });
 
@@ -47,6 +50,20 @@ class NewsArticles extends Component {
     //     });
     //   });
   }
+
+  getImageURL = filename => {
+    firebase
+      .storage()
+      .ref('images')
+      .child(filename)
+      .getDownloadURL()
+      .then(url => {
+        this.setState({
+          imageURL: url,
+        });
+      });
+  };
+
   render() {
     const article = this.state.article;
     const team = this.state.team;
@@ -58,7 +75,12 @@ class NewsArticles extends Component {
           date={article.date}
           author={article.author}
         />
-        <Body title={article.title} image={article.image} text={article.body} />
+        <Body
+          title={article.title}
+          image={article.image}
+          text={article.body}
+          imageURL={this.state.imageURL}
+        />
       </div>
     );
   }
